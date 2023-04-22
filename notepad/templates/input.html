@@ -6,16 +6,24 @@
 		<title>Python backend project</title>
 		<meta name="description" content="A description.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
-
-        <form action="/create">
-            <label for="titleinput">Title of Note:</label>
-            <input type="text" id="titleinput" name="title" {% if note %} value="{{note.title}}" {% endif %}>
-            <label for="contentinput">Content:</label>
-            <input type="text" id="contentinput" name="content" {% if note %} value="{{note.content}}" {% endif %}>
-            <input type="submit" value="submit" method="get">
-        </form>
-
+    <img class="background" src="{{url_for('static', filename='ocean.jpg')}}">
+    <div class="wrapper">
+        <div class="note">
+            <form action="/create">
+            <div class="notetitle">
+                <input type="text" class="titleinput" id="titleinput" name="title" {% if note %} value="{{note.title}}" {% endif %}>
+            </div>
+            <div class="content">
+            <input type="text" class="contentinput" id="contentinput" name="content" {% if note %} value="{{note.content}}" {% endif %}>
+            </div>
+            <div class="notebuttons">
+                <input type="submit" value="submit" method="get">
+            </div>
+            </form>
+        </div>
+    </div>
     </body>
 </html>

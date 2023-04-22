@@ -6,17 +6,40 @@
 		<title>Python backend project</title>
 		<meta name="description" content="A description.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
-{% if notes_to_display %}
-{% for note in notes_to_display %}
-        <h3><a href="/input/{{note.title}}">{{note.title}}</a></h3>
-		<p>{{note.content}}</p>
+		<img class="background" src="{{url_for('static', filename='ocean.jpg')}}">
+	<div class="wrapper">
+		{% if message %}
+		<div class="status">
+		<p>{{message}}</p>
+		</div>	
+		{% endif %}
+	
+	{% if notes_to_display %}
+	{% for note in notes_to_display %}
+		<div class="note">
+			<div class="notetitle">
+				<h3>{{note.title}}</h3>
+			</div>
+			<div class="content">
+				<p>{{note.content}}</p>
+			
+			</div>
+			<div class="notebuttons">
+				<a href="/input/{{note.title}}"><input type="submit" value="edit"></a>
+				<a href="/delete/{{note.title}}"><input type="submit" value="delete"></a>
+			</div>
+		</div>
 		
-{% endfor %}
-{% else %}
-		<h1>No notes!</h1>
-{% endif %}
-		<a href="/input"><input type="submit" value="new note"></a>
+	{% endfor %}
+	{% endif %}
+		<div class="controls">
+			<a href="/input"><input type="submit" value="new note"></a>
+			<a href="/save"><input type="submit" value="save notes"></a>
+			<a href="/load"><input type="submit" value="load notes"></a>
+		</div>
+	</div>
 	</body>
 </html>
