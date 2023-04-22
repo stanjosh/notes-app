@@ -8,14 +8,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-{% if user %}
-        <h1>{{user.name}}</h1>
-        <p>username: {{user.username}}</p>
-        <p>phone: {{user.phone}}</p>
-        <p>state: {{user.state}}</p>
+{% if notes_to_display %}
+{% for note in notes_to_display %}
+        <h3><a href="/input/{{note.title}}">{{note.title}}</a></h3>
+		<p>{{note.content}}</p>
+		
+{% endfor %}
 {% else %}
-        <h1>{{error}}</h1>
+		<h1>No notes!</h1>
 {% endif %}
-
+		<a href="/input"><input type="submit" value="new note"></a>
 	</body>
 </html>

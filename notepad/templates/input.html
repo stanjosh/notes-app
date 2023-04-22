@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Python backend project</title>
+		<meta name="description" content="A description.">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+
+        <form action="/create">
+            <label for="titleinput">Title of Note:</label>
+            <input type="text" id="titleinput" name="title" {% if note %} value="{{note.title}}" {% endif %}>
+            <label for="contentinput">Content:</label>
+            <input type="text" id="contentinput" name="content" {% if note %} value="{{note.content}}" {% endif %}>
+            <input type="submit" value="submit" method="get">
+        </form>
+
+    </body>
+</html>
