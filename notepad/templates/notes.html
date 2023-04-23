@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+
+{% block edit %}{% endblock %}
+{% block notes scoped %}
+{% if notes_to_display %}
+{% for note in notes_to_display %}
+    <div class="note">
+
+        <div class="titlebar"><div class="notetitle">{{note.title}}</div>
+            <div class="notebuttons">
+                <a href="/edit/{{note.title}}"><input type="submit" value="&#9999"></a>
+                <a href="/delete/{{note.title}}"><input type="submit" value="&#10006"></a>
+            </div>
+        </div>  
+        <div class="content"><p>{{note.content}}</p></div>
+
+    </div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'notes.html' %}
+
+{% block edit scoped %}
+    <div class="note">
+        <form action="/save/{{ note.title }}">
+        <div class="notetitle">
+            <input type="text" class="titleinput" id="titleinput" name="title" value="{{ note.title }}">
+        </div>
+        <div class="content">
+        <input type="text" class="contentinput" id="contentinput" name="content" value="{{ note.content}}">
+        </div>
+        <div class="notebuttons">
+            <input type="submit" value="&#10004" method="get">
+        </div>
+        </form>
+    </div>
+{% endblock %}

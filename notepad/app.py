@@ -1,9 +1,7 @@
 import pickle
-from flask import make_response, render_template, request, redirect, url_for
-from flask import Flask
-from jinja2 import filters
+from flask import Flask, render_template, request, redirect, url_for
 import notes.notes as notes
-import pickle
+
 
 notes_app = Flask(__name__.split('.')[0])
 note_list = {}
@@ -12,12 +10,19 @@ message = None
 @notes_app.route('/')
 def display_notes():
     global message
+    status = message
+    message = None
     print(note_list)
-    return render_template('home.html', notes_to_display=list(note_list.values()), message=message)
+    load_notes()
+    return render_template('notes.html', notes_to_display=list(note_list.values()), message=status)
+    
 
 @notes_app.route('/save')
-def save_notes():
+@notes_app.route('/save/<note>')
+def save_notes(note=None):
     global message
+    if note:
+        notes.edit(note_list, request.args.get('title'), request.args.get('content'))
     with open('notes/saved_notes.bin', "wb") as file:
         pickle.dump(note_list, file)
     message = f"notes saved"
@@ -32,20 +37,18 @@ def load_notes():
     message = f"notes loaded"
     return redirect(url_for('display_notes'))
     
-@notes_app.route('/create')
-def add_note():
-    new_note = notes.add_note(note_list, request.args.get('title'), request.args.get('content'))
-    return redirect(url_for('display_notes'))
 
-@notes_app.route('/input')
-@notes_app.route('/input/<note>')
-def input_note(note=None):
-    if note:
-        input_note = note_list[note]
-        return render_template('input.html', note=input_note)
-    else:
-        return render_template('input.html')
-    
+@notes_app.route('/edit')
+@notes_app.route('/edit/<note>')
+def edit_note(note=None):
+    return render_template('edit.html', note=note_list[note])
+
+@notes_app.route('/add')
+@notes_app.route('/add/<note>')
+def add_note(note=None):
+    note = note_list[notes.add(note_list)] if not note else note
+    return render_template('edit.html', note=note)
+
 @notes_app.route('/delete/<note>')
 def delete_note(note):
     global message

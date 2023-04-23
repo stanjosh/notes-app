@@ -1,15 +1,18 @@
+* {box-sizing:border-box;}
+
 html, body {
     font-family: Arial, Helvetica, sans-serif; 
 }
 
-img.background {
-    position: absolute;
+.background {
+    background-image: url('ocean.jpg');
+    background-size: cover;
+    position: fixed;
     left: 0px;
     top: 0px;
     z-index: -1;
     width: 100%;
     height: 100%;
-    filter: blur(5px);
     }
 
 .wrapper {
@@ -20,54 +23,80 @@ img.background {
 }
 
 .note {
-
+    backdrop-filter: blur(4px);;
     background: rgba(91, 133, 158, .4);
-    border: 2px solid rgba(91, 133, 158, 1);
     border-radius: 5px;
     margin-bottom: 15px;
-}
-
-.notetitle {
-
-    width: 90%;
-    margin-left:auto;
-}
-
-.content {
-    background: rgba(216, 216, 238, 0.6);
-    border: 2px solid rgba(43, 49, 53, 0.6);
-    border-radius: 5px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
     padding: 5px;
 }
 
-.notebuttons {
-    width: 90%;
-    margin: 10px;
+.titlebar {
+    margin: 0;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    width: 100%;
+}
+
+.notetitle {
+    font-size: larger;
+    font-weight: 700;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    justify-content: space-around;
+
+}
+
+.notebuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+.content {
+    background: rgba(216, 216, 238, 0.4);
+    border: 2px solid rgba(43, 49, 53, 0.6);
+    border-radius: 5px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    margin: auto;
 }
 
 .controls {
-    margin-top: 50px;
-    max-width: 500px;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    max-width: 100px;
     width:100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 15px;
+    margin-bottom: 15px;
+
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: flex-end;
 
 }
 
 input {
     margin: 10px;
     border: 2px solid rgba(43, 49, 53, 0.6);
-    border-radius: 5px;
+   
+}
+
+input[type=submit] {
+    border:none;
+    padding: 5px;
+    background-color:#507096;
     box-shadow:0 0 6px 4px rgba(0,0,0,0.1);
+    color:#fff;
+    width: 90%;
+    font-weight:600;
+    border-radius:5px;
+    border-radius: 5px;
 }
 
 .contentinput {

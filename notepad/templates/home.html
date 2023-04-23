@@ -9,37 +9,22 @@
 		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
-		<img class="background" src="{{url_for('static', filename='ocean.jpg')}}">
+		
 	<div class="wrapper">
 		{% if message %}
 		<div class="status">
 		<p>{{message}}</p>
 		</div>	
 		{% endif %}
-	
-	{% if notes_to_display %}
-	{% for note in notes_to_display %}
-		<div class="note">
-			<div class="notetitle">
-				<h3>{{note.title}}</h3>
-			</div>
-			<div class="content">
-				<p>{{note.content}}</p>
-			
-			</div>
-			<div class="notebuttons">
-				<a href="/input/{{note.title}}"><input type="submit" value="edit"></a>
-				<a href="/delete/{{note.title}}"><input type="submit" value="delete"></a>
-			</div>
-		</div>
 		
-	{% endfor %}
-	{% endif %}
+		{% block edit %}{% endblock %}
+		{% block notes %}{% endblock %}
+		
+
 		<div class="controls">
-			<a href="/input"><input type="submit" value="new note"></a>
-			<a href="/save"><input type="submit" value="save notes"></a>
-			<a href="/load"><input type="submit" value="load notes"></a>
+			<a href="/add"><input type="submit" value="+"></a>
 		</div>
 	</div>
+	<div class="background"></div>
 	</body>
 </html>
