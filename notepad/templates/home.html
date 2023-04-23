@@ -11,19 +11,15 @@
 	<body>
 		
 	<div class="wrapper">
-		{% if message %}
-		<div class="status">
-		<p>{{message}}</p>
-		</div>	
-		{% endif %}
-		
+		<div class="topbar">
+			{% if message %}
+			<div class="status">
+				<p>{{message}}</p>
+			</div>	
+			{% endif %}
+		</div>
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
-		
-
-		<div class="controls">
-			<a href="/add"><input type="submit" value="+"></a>
-		</div>
 	</div>
 	<div class="background"></div>
 	</body>
