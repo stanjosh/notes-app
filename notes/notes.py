@@ -21,5 +21,5 @@ def edit(note_list, note, title, content):
         note_list[title]= note
         del note_list[old_title]
         
-        
-    
+def delete(note_list, note):
+    return f"note '{note_list.pop(note).title}' deleted"

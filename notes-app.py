@@ -19,7 +19,7 @@ def display_notes():
 @notes_app.route('/reset')
 def reset_notes():
     note_list.clear()
-    add_note(note_list)
+    add_note()
     with open('notes/saved_notes.bin', "wb+") as file:
         pickle.dump(note_list, file)
     return redirect(url_for('display_notes'))
@@ -48,7 +48,7 @@ def load_notes():
 @notes_app.route('/edit')
 @notes_app.route('/edit/<note>')
 def edit_note(note=None):
-    return render_template('edit.html', note=note)
+    return render_template('edit.html', note=note_list[note])
 
 @notes_app.route('/add')
 def add_note():
@@ -58,8 +58,7 @@ def add_note():
 @notes_app.route('/delete/<note>')
 def delete_note(note):
     global message
-    message = f"note '{note_list[note].title}' deleted"
-    del note_list[note]
+    message = notes.delete(note_list, note)
     save_notes()
     return redirect(url_for('display_notes'))
         
