@@ -7,14 +7,14 @@
     <div class="note">
 
         <div class="titlebar">
-            <div class="notetitle">{{note.title}}</div>
+            <div class="notetitle">{{ note.title }}</div>
             <div class="notebuttons">
-                <a href="/add"><input type="submit" value="+"></a>
-                <a href="/edit/{{note.title}}"><input type="submit" value="&#9999"></a>
-                <a href="/delete/{{note.title}}"><input type="submit" value="&#10006"></a>
+                <a id="button-30" href="/add"><input type="submit" value="+"></a>
+                <a href="/edit/{{ note.title }}"><input type="submit" value="&#9999"></a>
+                <a href="/delete/{{ note.title }}"><input type="submit" value="&#10006"></a>
             </div>
         </div>  
-        <div class="content"><p>{{note.content}}</p></div>
+        <div class="content"><p>{{ note.content }}</p></div>
 
     </div>
 {% endfor %}

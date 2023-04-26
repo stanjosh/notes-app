@@ -14,6 +14,8 @@ def display_notes():
     message = None
     print(note_list)
     load_notes()
+    if not note_list:
+        reset_notes()
     return render_template('notes.html', notes_to_display=list(note_list.values()), message=status)
     
 @notes_app.route('/reset')

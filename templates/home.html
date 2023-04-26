@@ -14,13 +14,15 @@
 		<div class="topbar">
 			{% if message %}
 			<div class="status">
-				<p>{{message}}</p>
-			</div>	
+				<p>{{ message }}</p>
+			</div>
 			{% endif %}
+
 		</div>
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
 	</div>
+	
 	<div class="background"></div>
 	</body>
 </html>
