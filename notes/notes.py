@@ -25,10 +25,10 @@ def edit(note_list, note, title, content):
     if title in note_list:
         note.content = content
     else:
-        old_title = note.title
+        old_title = note.title.copy()
         note.title = title
         note_list[title]= note
-        del note_list[old_title]
+        delete(note_list, note)
         
 def delete(note_list, note):
     return f"note '{note_list.pop(note).title}' deleted"
