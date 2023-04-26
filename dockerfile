@@ -1,12 +1,11 @@
-# syntax=docker/dockerfile:1
+# Set base image (host OS)
+FROM python:3.12.0a7-slim
 
-FROM python:3.8-slim-buster
+# By default, listen on port 5000
+EXPOSE 5000/tcp
 
-WORKDIR /notes-app
+# Install any dependencies
+RUN pip install -r ./notes-app/requirements.txt
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-
-COPY . .
-
-CMD ["python3", "-m" , "flask", "run", "--app", "notes-app:notes_app" "--host=0.0.0.0"]
+# Specify the command to run on container start
+CMD [ "python", "uwsgi.py" ]
