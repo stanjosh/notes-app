@@ -62,3 +62,5 @@ def delete_note(note):
     save_notes()
     return redirect(url_for('display_notes'))
         
+if __name__ == "__main__":
+    notes_app.run(debug=True)
