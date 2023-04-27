@@ -1,5 +1,5 @@
 notes/saved_notes.bin
-venv
-__pycache__
+venv/
+__pycache__/
 notes-app.ini
-notes/__pycache__
+notes/__pycache__/
