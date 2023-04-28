@@ -10,7 +10,6 @@ def home():
     global message
     status = message
     message = None
-    load_notes()
     print(notes.note_dict)
     if not notes.note_dict:
         reset_notes()

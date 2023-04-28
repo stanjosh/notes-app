@@ -9,6 +9,7 @@ notes_file = os.path.join('.', "saved_notes.bin")
 notes_status = None
 
 def display_notes():
+    load_notes()
     return list(note_dict.values())
     
 def get_note_by_title(title):
