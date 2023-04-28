@@ -22,7 +22,7 @@ def display_notes():
 def reset_notes():
     note_list.clear()
     add_note()
-    with open('notes/saved_notes.bin', "wb+") as file:
+    with open('/saved_notes.bin', "wb+") as file:
         pickle.dump(note_list, file)
     return redirect(url_for('display_notes'))
 
@@ -32,7 +32,7 @@ def save_notes(note=None):
     global message
     if note:
         notes.edit(note_list, note_list[note], request.args.get('title'), request.args.get('content'))
-    with open('notes/saved_notes.bin', "wb+") as file:
+    with open('/saved_notes.bin', "wb+") as file:
         pickle.dump(note_list, file)
     message = f"notes saved"
     return redirect(url_for('display_notes'))
@@ -41,7 +41,7 @@ def save_notes(note=None):
 def load_notes():
     global message
     global note_list
-    with open('notes/saved_notes.bin', "rb+") as file:
+    with open('/saved_notes.bin', "rb+") as file:
         note_list = pickle.load(file)
     message = f"notes loaded"
     return redirect(url_for('display_notes'))
