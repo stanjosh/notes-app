@@ -1,68 +1,66 @@
-import pickle
 from flask import Flask, render_template, request, redirect, url_for
 import notes.notes as notes
 
-
 notes_app = Flask(__name__.split('.')[0])
-note_list = {}
 message = None
 
+
 @notes_app.route('/')
-def display_notes():
+def home():
     global message
     status = message
     message = None
-    print(note_list)
     load_notes()
-    if not note_list:
+    print(notes.note_dict)
+    if not notes.note_dict:
         reset_notes()
-    return render_template('notes.html', notes_to_display=list(note_list.values()), message=status)
+    return render_template('notes.html', notes_to_display=notes.display_notes(), message=status)
     
-@notes_app.route('/reset')
-def reset_notes():
-    note_list.clear()
-    add_note()
-    with open('/saved_notes.bin', "wb+") as file:
-        pickle.dump(note_list, file)
-    return redirect(url_for('display_notes'))
-
-@notes_app.route('/save')
-@notes_app.route('/save/<note>')
-def save_notes(note=None):
-    global message
-    if note:
-        notes.edit(note_list, note_list[note], request.args.get('title'), request.args.get('content'))
-    with open('/saved_notes.bin', "wb+") as file:
-        pickle.dump(note_list, file)
-    message = f"notes saved"
-    return redirect(url_for('display_notes'))
-                    
-@notes_app.route('/load') 
-def load_notes():
-    global message
-    global note_list
-    with open('/saved_notes.bin', "rb+") as file:
-        note_list = pickle.load(file)
-    message = f"notes loaded"
-    return redirect(url_for('display_notes'))
     
-
 @notes_app.route('/edit')
-@notes_app.route('/edit/<note>')
-def edit_note(note=None):
-    return render_template('edit.html', note=note_list[note])
+@notes_app.route('/edit/<note_to_edit>')
+@notes_app.route('/edit/save/<note_to_save>')
+def edit_note(note_to_edit=None, note_to_save=None):
+    if note_to_save:
+        note = notes.get_note_by_title(note_to_save)
+        new_title = request.args.get('title', None)
+        new_content = request.args.get('content', None)
+        notes.Notes.edit(note, new_title, new_content)
+        return redirect(url_for('home'))
+    if note_to_edit:
+        note_to_edit = notes.get_note_by_title(note_to_edit)
+        return render_template('edit.html', note=note_to_edit)
+
 
 @notes_app.route('/add')
 def add_note():
-    note = notes.add(note_list)
-    return render_template('edit.html', note=note)
+    note_title = notes.add()
+    return render_template('edit.html', note=note_title)
 
-@notes_app.route('/delete/<note>')
-def delete_note(note):
-    global message
-    message = notes.delete(note_list, note)
-    save_notes()
-    return redirect(url_for('display_notes'))
+
+@notes_app.route('/delete/<note_title>')
+def delete_note(note_title):
+    notes.update_note_dict_key(old_title=note_title)
+    return redirect(url_for('home'))
+
+        
+@notes_app.route('/reset')
+def reset_notes():
+    notes.reset_notes()
+    return redirect(url_for('home'))
+
+
+@notes_app.route('/save')
+def save_notes():
+    notes.save_notes()
+    return redirect(url_for('home'))
+
+                    
+@notes_app.route('/load') 
+def load_notes():
+    notes.load_notes()
+    return redirect(url_for('home'))
+
         
 if __name__ == "__main__":
    notes_app.run(host='0.0.0.0', port=5000)

@@ -2,7 +2,7 @@
 
 {% block edit scoped %}
     <div class="note">
-        <form action="/save/{{ note.title }}">
+        <form action="/edit/save/{{ note.title }}">
         <div class="titlebar">
             <input type="text" class="titleinput" id="titleinput" name="title" value="{{ note.title }}">
             <div class="notebuttons">
