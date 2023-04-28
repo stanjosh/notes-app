@@ -26,21 +26,22 @@ def edit_note(note_to_edit=None, note_to_save=None):
         new_title = request.args.get('title', None)
         new_content = request.args.get('content', None)
         notes.Notes.edit(note, new_title, new_content)
-        return redirect(url_for('home'))
+
     if note_to_edit:
         note_to_edit = notes.get_note_by_title(note_to_edit)
         return render_template('edit.html', note=note_to_edit)
+    return redirect(url_for('home'))
 
 
 @notes_app.route('/add')
 def add_note():
     note_title = notes.add()
-    return render_template('edit.html', note=note_title)
+    return redirect(url_for('edit_note', note_to_edit=note_title))
 
 
 @notes_app.route('/delete/<note_title>')
 def delete_note(note_title):
-    notes.update_note_dict_key(old_title=note_title)
+    notes.delete_note(note_title)
     return redirect(url_for('home'))
 
         

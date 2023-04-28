@@ -14,7 +14,15 @@ def display_notes():
 def get_note_by_title(title):
     return note_dict[title]
 
-def update_note_dict_key(note=None, old_title=None):
+def check_for_existing(note_title):
+    if note_title:
+        try:
+            get_note_by_title(note_title)
+        except KeyError:
+            return note_title
+    return f"New Note {len(display_notes())}"
+
+def update_note_dict_key(note, old_title=None):
     note_dict[note.title] = note
     if old_title:
         print (f"removed dictionary entry '{note_dict.pop(old_title)}")
@@ -22,7 +30,7 @@ def update_note_dict_key(note=None, old_title=None):
     save_notes()
 
 class Notes:
-    def __init__(self, title='', content='', **kwargs) -> None:
+    def __init__(self, title='', content='', **kwargs):
         self.title = title
         self.content = content
         self.editing = kwargs.get('editing', False)
@@ -30,22 +38,23 @@ class Notes:
     def edit(self, title, content):
         old_title = self.title
         print (f'old: {old_title}')
-        self.title = title
+        self.title = check_for_existing(title)
         print (f'new: {self.title}')
         self.content = content
         print (f'new: {self.content}')
         update_note_dict_key(note=self, old_title=old_title)
 
-
-
+    
 def add(title='New Note', content=lorem):
-    new_note = Notes(title, content, editing=True)
-    update_note_dict_key(new_note)
-    return new_note
+    new_note = Notes(check_for_existing(title), content, editing=True)
+    update_note_dict_key(note=new_note)
+    return new_note.title
 
        
-def delete(note_list, note):
-    return f"note '{note_list.pop(note).title}' deleted"
+def delete_note(note_title):
+    del note_dict[note_title]
+    save_notes()
+    print(note_dict)
     
 def save_notes():
     global notes_status
@@ -62,6 +71,6 @@ def load_notes():
     
 def reset_notes():
     note_dict.clear()
-    add()
+    add('reset notes!')
     with open(notes_file, "wb+") as pickle_file:
         pickle.dump(note_dict, pickle_file)

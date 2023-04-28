@@ -2,4 +2,4 @@ saved_notes.bin
 venv/
 __pycache__/
 notes-app.ini
-notes/__pycache__/
+*__pycache__/
