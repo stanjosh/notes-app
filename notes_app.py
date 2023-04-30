@@ -4,7 +4,7 @@ import os, pickle
 notes_app = Flask(__name__.split('.')[0])
 lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
 note_dict = {}
-notes_file = os.path.join('.', "saved_notes.bin") 
+notes_file = os.path.join('./static', "saved_notes.bin") 
 notes_status = None
 message = None
 
