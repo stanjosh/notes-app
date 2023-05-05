@@ -3,13 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Python backend project</title>
+
 		<meta name="description" content="A description.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
-		
+	<nav>
+		<ul>
+			<li><a href="/reset"><input type="submit" value="reset"></a>
+			<li><a href="/login"><input type="submit" value="login"></a>
+			<li><a href="/login"><input type="submit" value="logout"></a>
+			<li><a href="/debug"><input type="submit" value="print session"></a>
+	</nav>	
 	<div class="wrapper">
 		<div class="topbar">
 			{% if message %}
@@ -19,6 +25,7 @@
 			{% endif %}
 
 		</div>
+		{% block login %}{% endblock %}
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
 	</div>

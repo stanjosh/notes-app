@@ -15,6 +15,26 @@ html, body {
     height: 100%;
     }
 
+    nav {
+        border: 1px dashed red;
+        width: 200px;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        flex: 0 1 auto;
+        flex-wrap: wrap;
+    }
+
+    nav ul li {
+        padding: 5px;
+    }
+
+    nav ul li button {
+        padding: 5px;
+    }
+
 .wrapper {
     display: flex;
     flex-direction: column;

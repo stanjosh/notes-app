@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+<title>login pls</title>
+{% block login %}
+<form method="post" action="/success">  
+    <table>  
+        <tr><td>email</td><td><input type = 'email' name = 'email'></td></tr>  
+        <tr><td>password</td><td><input type = 'password' name = 'pass'></td></tr>  
+        <tr><td><input type = "submit" value = "ok"></td></tr>  
+    </table>  
+</form>
+{% endblock %}

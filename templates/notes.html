@@ -1,20 +1,20 @@
 {% extends 'home.html' %}
-
+<title>notes</title>
 {% block edit %}{% endblock %}
 {% block notes scoped %}
-{% if notes_to_display %}
-{% for note in notes_to_display %}
+{% if session['note_dict'] %}
+{% for note_title in session['note_dict'] %}
     <div class="note">
 
         <div class="titlebar">
-            <div class="notetitle">{{ note.title }}</div>
+            <div class="notetitle">{{ note_title }}</div>
             <div class="notebuttons">
                 <a id="button-30" href="/add"><input type="submit" value="+"></a>
-                <a href="/edit/{{ note.title }}"><input type="submit" value="&#9999"></a>
-                <a href="/delete/{{ note.title }}"><input type="submit" value="&#10006"></a>
+                <a href="/edit/{{ note_title }}"><input type="submit" value="&#9999"></a>
+                <a href="/delete/{{ note_title }}"><input type="submit" value="&#10006"></a>
             </div>
         </div>  
-        <div class="content"><p>{{ note.content }}</p></div>
+        <div class="content"><p>{{ session['note_dict'][note_title] }}</p></div>
 
     </div>
 {% endfor %}

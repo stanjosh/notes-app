@@ -2,15 +2,15 @@
 
 {% block edit scoped %}
     <div class="note">
-        <form action="/edit/save/{{ note.title }}">
+        <form action="/edit/save">
         <div class="titlebar">
-            <input type="text" class="titleinput" id="titleinput" name="title" value="{{ note.title }}">
+            <input type="text" class="titleinput" id="titleinput" name="title" value="{{ note_to_edit }}">
             <div class="notebuttons">
                 <input type="submit" value="&#10004" method="get">
             </div>
         </div>
         <div class="content" contenteditable>
-        <textarea contenteditable type="text" class="contentinput" id="contentinput" name="content" rows="15">{{ note.content }}</textarea>
+        <textarea contenteditable type="text" class="contentinput" id="contentinput" name="content" rows="15">{{ session['note_dict'][note_to_edit] }}</textarea>
         </div>
 
         </form>
