@@ -1,3 +1,10 @@
+:root {
+    --color-dark: #3e4449;
+    --color-med: #4f7391;
+    --color-accent: #0070cc;
+    --color-light: #c3d4e2;
+}
+
 * {box-sizing:border-box;}
 
 html, body {
@@ -52,7 +59,8 @@ nav ul li button {
 .note {
     display: flex;
     backdrop-filter: blur(4px);
-    background: rgba(91, 133, 158, .4);
+    background: var(--color-med);
+    opacity: .3;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 5px;
@@ -80,8 +88,8 @@ nav ul li button {
     margin: 0;
     padding: 2%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
-    white-space:nowrap;
+    background-color: var(--color-light);
+    opacity: .3;
 }
 
 .content-input {
@@ -98,8 +106,8 @@ nav ul li button {
     border: none;
     border-radius: 6px ;
     padding: 2%;
-    background-color: rgba(255, 255, 255, 0.3);
-    
+    background-color: var(--color-light);
+    opacity: .3;
 }
 
 .note-buttons {
@@ -151,7 +159,7 @@ form {
     border-radius: 6px;
     resize: none;
     overflow: hidden;
-    background-color: rgb(91, 133, 158);
+    background-color: var(--color-accent);
     padding: 8px;
 }
 
@@ -160,16 +168,9 @@ form {
 }
 
 #loginDialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--color-dark);
+    opacity: .5;
     backdrop-filter: blur(7px);
-}
-
-.big-button {
-    border: none;
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    padding: 15px;
 }
 
 .flashes {
@@ -188,8 +189,8 @@ form {
 }
 
 .add-corner {
-  background-color: #d5e4e9;
-  border: 2px solid #2284c5;
+  background-color: var(--color-med);
+  border: 2px solid var(--color-accent);
   border-radius: 30px;
   box-shadow: #2284c5 4px 4px 0 0;
   color: #2284c5;
@@ -210,11 +211,11 @@ form {
 }
 
 .add-corner:hover {
-  background-color: #d5e4e9;
+  background-color: var(--color-light);
 }
 
 .add-corner:active {
-  box-shadow: #2284c5 2px 2px 0 0;
+  box-shadow: var(--color-accent) 2px 2px 0 0;
   transform: translate(2px, 2px);
 }
 
