@@ -1,25 +1,11 @@
 {% extends 'home.html' %}
 
 {% block login %}
-<dialogue class="note" id="loginDialogue">
 
-    <div class="titlebar">
-        <div class="notetitle">login</div>
-        <div class="notebuttons">
+<script>
+    window.onload = function() {
+        loginDialog.showModal();
+      };
+</script>
 
-           
-
-        </div>
-    </div>  
-    <div class="content">            
-        <form method="post" action="/success">  
-        <table>  
-            <tr><td>email</td><td><input type='email' name='email'></td></tr>  
-            <tr><td>password</td><td><input type='password' name='pass'></td></tr>  
-            <tr><td><input class="big-button" type="submit" value="&#10004"></td></tr>
-            
-        </table>  
-    </form></div>
-
-</dialogue>
 {% endblock %}

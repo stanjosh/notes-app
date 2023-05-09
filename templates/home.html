@@ -23,7 +23,7 @@
 			<li><a href="/login"><input type="submit" value="logout"></a>
 			<li><a href="/debug"><input type="submit" value="session info"></a>
 			<li><a href="/reset"><input type="submit" value="reset"></a>
-			{% block login %}{% endblock %}
+
 	</nav>	
 	<main class="wrapper">
 		{% with messages = get_flashed_messages() %}
@@ -40,10 +40,6 @@
 			{% endwith %}
 		
 
-
-
-
-
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
 	</main>
@@ -56,6 +52,7 @@
 </body>
 	<dialog id="loginDialog">
         <div class="login-form">
+			you can use a fake email. it just identifies the session
 			<form method="post" action="/success">  
 
 				<input type='email' name='email' value="email" class="title-input">
@@ -67,4 +64,5 @@
 		</div>
 	</dialog>
 	<script src="{{ url_for('static', filename='dialogs.js') }}"></script>
+	{% block login %}{% endblock %}
 </html>
