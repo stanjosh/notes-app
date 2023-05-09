@@ -60,7 +60,7 @@ nav ul li button {
     display: flex;
     backdrop-filter: blur(4px);
     background: var(--color-med);
-    opacity: .3;
+    opacity: .4;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 5px;
@@ -89,7 +89,7 @@ nav ul li button {
     padding: 2%;
     width: 100%;
     background-color: var(--color-light);
-    opacity: .3;
+    opacity: .8;
 }
 
 .content-input {
@@ -107,7 +107,7 @@ nav ul li button {
     border-radius: 6px ;
     padding: 2%;
     background-color: var(--color-light);
-    opacity: .3;
+    opacity: .8;
 }
 
 .note-buttons {
