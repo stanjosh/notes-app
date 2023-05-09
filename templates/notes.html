@@ -13,8 +13,10 @@
         
         <div class="titlebar">
             <textarea type="text" class="title-input" name="title" rows="1">{{note_title}}</textarea>
+            <div class="note-buttons">
             <button type="submit">&#9989</button>
             <button onclick="window.location='/delete/{{note_title}}';return false;">&#10006</button>
+            </div>
         </div>
 
         <textarea type="text" class="content-input" name="content" rows="7">{{session['note_dict'][note_title]}}</textarea>
