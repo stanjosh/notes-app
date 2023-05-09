@@ -3,33 +3,68 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+		<link rel="icon" type="image/x-icon" href="static/favicon.ico">
 		<meta name="description" content="A description.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+		
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css' )}}">
 	</head>
 	<body>
+
+	
+
+		
 	<nav>
+		this functionality is beta af<br>
+		and yeah, there's cookies
 		<ul>
-			<li><a href="/reset"><input type="submit" value="reset"></a>
-			<li><a href="/login"><input type="submit" value="login"></a>
+			
+			<li><input type="submit" value="login" id="loginButton"></a>
 			<li><a href="/login"><input type="submit" value="logout"></a>
-			<li><a href="/debug"><input type="submit" value="print session"></a>
+			<li><a href="/debug"><input type="submit" value="session info"></a>
+			<li><a href="/reset"><input type="submit" value="reset"></a>
+			{% block login %}{% endblock %}
 	</nav>	
-	<div class="wrapper">
-		<div class="topbar">
-			{% if message %}
-			<div class="status">
-				<p>{{ message }}</p>
+	<main class="wrapper">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<div class="flashes">
+			<ul>
+
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+			</ul>
 			</div>
 			{% endif %}
+			{% endwith %}
+		
 
-		</div>
-		{% block login %}{% endblock %}
+
+
+
+
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
-	</div>
+	</main>
 	
+
+	<a href="/add"><button class="add-corner" role="button">&#10010</button></a>
+
 	<div class="background"></div>
-	</body>
+	
+</body>
+	<dialog id="loginDialog">
+        <div class="login-form">
+			<form method="post" action="/success">  
+
+				<input type='email' name='email' value="email" class="title-input">
+				<input type='password' name='pass' value="password" class="title-input">
+				<input class="big-button" id="emailConfirmBtn" type="submit" value="&#10004">
+		
+
+			</form>
+		</div>
+	</dialog>
+	<script src="{{ url_for('static', filename='dialogs.js') }}"></script>
 </html>

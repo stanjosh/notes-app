@@ -1,44 +1,63 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 
 notes_app = Flask(__name__.split('.')[0])
 notes_app.secret_key = 'dev'
+lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
+
+
+def check_for_existing(note_title):
+    existing_title_number = len(list(note for note in session['note_dict'] if note.startswith(note_title)))
+    print(existing_title_number)
+    pass
+    return  f"{note_title} {existing_title_number + 1}" if existing_title_number >= 1 else note_title
+
 
 
 @notes_app.route('/')
-def home():
-    if not session['email']:
+def home(error=None):
+    if error:
+        flash(error)
+    if not 'email' in session:
+        flash('please log in')
         return redirect(url_for('login'))
-    if not session['note_dict']:
-        return redirect(url_for('reset_notes'))
     return render_template('notes.html')
     
-@notes_app.route('/add')    
-@notes_app.route('/edit/<note_to_edit>')
-@notes_app.route('/delete/<note_to_delete>')
-def edit_note(note_to_edit='New note', note_to_delete=None):
-    if note_to_delete:
-        session['note_dict'].pop(note_to_delete)
-        session.modified = True
-        return redirect(url_for('home'))
-    return render_template('edit.html', note_to_edit=note_to_edit)
 
-@notes_app.route('/edit/save')
-def note_to_save():
-    edit(request.args.get('title'), request.args.get('content'))
+@notes_app.route('/add')    
+def new_note():
+    new_note = ('New note')
+    session['note_dict'][new_note] = lorem
+    session.modified = True
+    return redirect(url_for('home'))
+
+@notes_app.route('/delete/<note_to_delete>')
+def delete_note(note_to_delete=None):
+    if note_to_delete:
+        print(f"trying to delete '{session['note_dict'].pop(note_to_delete)}")
+        flash(f"deleted {note_to_delete}")
+        session.modified = True
+    return redirect(url_for('home'))
+
+
+@notes_app.route('/save/<note_title>')
+def note_to_save(note_title):    
+    note_title = check_for_existing(request.args.get('title'))
+    content = request.args.get('content')
+    session['note_dict'][note_title] = content
     session.modified = True
     return redirect(url_for('home'))
 
 @notes_app.route('/reset')
 def reset_notes():
     session['note_dict'] = {}
-    session['note_dict']['reset notes!'] = lorem
     session.modified = True
-    return redirect(url_for('login'))
+    flash('reset notes')
+    return redirect(url_for('logout'))
 
 @notes_app.route('/debug')
 def debug_info():
-    print(session)
+    flash(str(session))
     return redirect(url_for('home'))
 
 @notes_app.route('/login')  
@@ -48,15 +67,15 @@ def login():
 @notes_app.route('/success', methods=["POST"])  
 def success():  
     if request.method == "POST":  
-        session['email']=request.form['email']
+        session['email'] = request.form['email']
         print(session['email'])
         session.modified = True
-        try:
-            if session['note_dict']:
-                return redirect(url_for('home', message='successfully logged in'))  
-        except KeyError:
+        flash('You were successfully logged in')
+        if 'note_dict' in session:
+            return redirect(url_for('home'))  
+        else:
             return redirect(url_for('reset_notes'))
-
+        
     
  
 @notes_app.route('/logout')  
@@ -68,25 +87,3 @@ def logout():
         return redirect(url_for('home', message='successfully logged out'))
     else:  
         return '<p>user already logged out</p>'  
-
-
-lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
-
-def delete(title):
-    return session['note_dict'].pop(title)
-
-def edit(title='New Note', content=lorem):
-    title = check_for_existing(title)
-    session['note_dict'][title] = content
-
-
-def check_for_existing(note_title):
-    existing_title_number = len(list(note for note in session['note_dict'] if note.startswith(note_title)))
-    return  f"{note_title} {existing_title_number + 1}" if existing_title_number >= 1 else note_title
-
-
-
-def save(note_dict):
-    # with open(os.path.join('./static', "saved_notes.bin") , "wb+") as pickle_file:
-    #     pickle.dump(session['note_note_dict'], pickle_file)
-    pass
