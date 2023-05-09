@@ -7,10 +7,16 @@ lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
 
 
 def check_for_existing(note_title):
-    existing_title_number = len(list(note for note in session['note_dict'] if note.startswith(note_title)))
-    print(existing_title_number)
-    pass
-    return  f"{note_title} {existing_title_number + 1}" if existing_title_number >= 1 else note_title
+    if note_title in session['note_dict']:
+        if note_title[-1].isdigit():
+            existing_title_number = int(note_title[-1]) + 1
+            print(existing_title_number)
+            existing_title_number = str(existing_title_number)
+            print(existing_title_number)
+        else:
+            existing_title_number = 2
+            note_title = f"{note_title.rstrip(' 0123456789')} {existing_title_number}"
+    return  note_title
 
 
 
