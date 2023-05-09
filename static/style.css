@@ -60,7 +60,7 @@ nav ul li button {
     display: flex;
     backdrop-filter: blur(4px);
     background: var(--color-med);
-    opacity: .4;
+    opacity: .69;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 5px;
@@ -78,7 +78,7 @@ nav ul li button {
 
 .title-input {
     display: flex;
-    flex: 0 1 400px;
+    flex: 0 1 45px;
     font-size: larger;
     font-weight: 700;
     height: 100%;
@@ -89,7 +89,7 @@ nav ul li button {
     padding: 2%;
     width: 100%;
     background-color: var(--color-light);
-    opacity: .8;
+
 }
 
 .content-input {
@@ -107,7 +107,7 @@ nav ul li button {
     border-radius: 6px ;
     padding: 2%;
     background-color: var(--color-light);
-    opacity: .8;
+
 }
 
 .note-buttons {
@@ -169,17 +169,25 @@ form {
 
 #loginDialog::backdrop {
     background: var(--color-dark);
-    opacity: .5;
+    opacity: .9;
     backdrop-filter: blur(7px);
+}
+
+.big-button {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    border-radius: 8px;
+    border: none;
+    padding: 8px;
 }
 
 .flashes {
     border-radius: 5px;
-    background-color: #f5e0a6;
+    background-color: var(--color-light);
     opacity: .5;
     padding: 5px 10px;
     width: 100%;
-    color: black;
+    color: var(--color-dark);
     font-size: larger;
     font-weight: 600;
 }
@@ -192,8 +200,8 @@ form {
   background-color: var(--color-med);
   border: 2px solid var(--color-accent);
   border-radius: 30px;
-  box-shadow: #2284c5 4px 4px 0 0;
-  color: #2284c5;
+  box-shadow: var(--color-accent) 4px 4px 0 0;
+  color: var(--color-accent);
   cursor: pointer;
   display: inline-block;
   font-weight: 700;
