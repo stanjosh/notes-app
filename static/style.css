@@ -150,7 +150,6 @@ form {
 
 #loginDialog div {
     display: flex;
-    flex-direction: column;
     align-content: space-around;
     top: 0;
     left: 0;
@@ -165,6 +164,7 @@ form {
 
 #loginDialog .title-input {
     margin-bottom: 6px;
+    max-height: 45px;
 }
 
 #loginDialog::backdrop {
