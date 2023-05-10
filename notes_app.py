@@ -32,7 +32,7 @@ def home(error=None):
 
 @notes_app.route('/add')    
 def new_note():
-    new_note = ('New note')
+    new_note = check_for_existing('New note')
     session['note_dict'][new_note] = lorem
     session.modified = True
     return redirect(url_for('home'))
@@ -48,7 +48,7 @@ def delete_note(note_to_delete=None):
 
 @notes_app.route('/save/<note_title>')
 def note_to_save(note_title):    
-    note_title = check_for_existing(request.args.get('title'))
+    note_title = request.args.get('title')
     content = request.args.get('content')
     session['note_dict'][note_title] = content
     session.modified = True
