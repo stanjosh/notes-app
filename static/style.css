@@ -1,6 +1,6 @@
 :root {
     --color-dark: #3e4449;
-    --color-med: #4f7391;
+    --color-med: #5187b3;
     --color-accent: #0070cc;
     --color-light: #c3d4e2;
 }
@@ -150,6 +150,7 @@ form {
 
 #loginDialog div {
     display: flex;
+    flex-wrap: wrap;
     align-content: space-around;
     top: 0;
     left: 0;
@@ -197,29 +198,30 @@ form {
 }
 
 .add-corner {
-  background-color: var(--color-med);
-  border: 2px solid var(--color-accent);
-  border-radius: 30px;
-  box-shadow: var(--color-accent) 4px 4px 0 0;
-  color: var(--color-accent);
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 700;
-  font-size: 28px;
-  padding: 0 25px;
-  line-height: 50px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
+    background-color: var(--color-med);
+    color: var(--color-light);
+    border: 2px solid var(--color-accent);
+    border-radius: 30px;
+    box-shadow: var(--color-accent) 4px 4px 0 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 28px;
+    padding: 0 25px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    position: absolute;
+    left: 45%;
+    top: 50px;
 }
 
 .add-corner:hover {
   background-color: var(--color-light);
+  color: var(--color-accent);
 }
 
 .add-corner:active {
