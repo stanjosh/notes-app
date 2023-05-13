@@ -3,31 +3,29 @@
 {% block notes scoped %}
 
 
-{% if session['note_dict'] %}
-{% for note_title in session['note_dict'] %}
-    <div class="note">
+{% if notes %}
+{% for note in notes %}
 
-        <form action="/save/{{note_title}}">
+
+        <form action="{{note['_id']}}/save" target="hiddenForm" class="noteForm"  id="{{note['_id']}}">
             
 
         
         <div class="titlebar">
-            <textarea type="text" class="title-input" name="title" rows="1">{{note_title}}</textarea>
+            <textarea type="text" class="titleInput" name="title" rows="1" data-formId="{{note['_id']}}">{{note['title']}}</textarea>
             <div class="note-buttons">
-            <button type="submit">&#9989</button>
-            <button onclick="window.location='/delete/{{note_title}}';return false;">&#10006</button>
+
+                <a class="button delete" role="button" data-formId="{{note['_id']}}">&#10006</a>
             </div>
         </div>
 
-        <textarea type="text" class="content-input" name="content" rows="7">{{session['note_dict'][note_title]}}</textarea>
+        <textarea type="text" class="contentInput" name="content" rows="7" data-formId="{{note['_id']}}">{{note['content']}}</textarea>
             
         </form>
         
         
-    </div>
+
 
 {% endfor %}
-{% else %}
-<a href="/add"><button class="add-corner" role="button">&#10010</button></a>	
 {% endif %}
 {% endblock %}

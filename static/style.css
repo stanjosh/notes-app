@@ -1,17 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Neuton:wght@300&display=swap');
+
 :root {
     --color-dark: #3e4449;
     --color-med: #5187b3;
     --color-accent: #0070cc;
-    --color-light: #c3d4e2;
+    --color-light: #e7e6dc;
+    --notes-font: 'Neuton', serif;
 }
+
+
 
 * {box-sizing:border-box;}
 
 html, body {
-    font-family: Arial, Helvetica, sans-serif; 
+    position: relative;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    min-height: 100%;
+    z-index: -10;
+    scroll-snap-type: proximity;
 }
 
 .background {
+    pointer-events: none;
     background-image: url('ocean.png');
     background-size: cover;
     position: fixed;
@@ -22,28 +34,37 @@ html, body {
     height: 100%;
     }
 
-nav {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
+.blurry {
+    background-color: var(--color-med);
+    filter: blur(8px) brightness(0.2);
+    opacity: 0.7;
+    z-index: 1;
+    }
+    
+
+
+#nav {
     max-height: fit-content;
-    border: 1px dashed red;
-    background-color: bisque;
+    border: 1px solid black;
+    background-color: rgba(30, 143, 255, 0.397);
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
     width: 200px;
+    z-index: 10;
 }
 
-nav ul {
+#nav ul {
     display: flex;
-    list-style: none;
+    list-style-type: none;
     flex: 0 1 auto;
     flex-wrap: wrap;
 }
 
-nav ul li {
+#nav ul li {
     padding: 5px;
 }
 
-nav ul li button {
+#nav ul li button {
     padding: 5px;
 }
 
@@ -54,18 +75,29 @@ nav ul li button {
     width:100%;
     margin-left: auto;
     margin-right: auto;
+    transition: all .3s;
+    justify-content: start;
+    max-height: max-content;
 }
 
-.note {
+.squish {
+    height: min-content;
+}
+
+.noteForm {
     display: flex;
-    backdrop-filter: blur(4px);
+    flex: 0 1 auto;
     background: var(--color-med);
     opacity: .69;
-    border-radius: 5px;
+    padding: 10px;
+    border-radius: 10px;
     margin-bottom: 15px;
-    padding: 5px;
     width: 100%;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    resize: both;
+    height: fit-content;
+    transition: all 350ms;
 }
 
 .titlebar {
@@ -74,14 +106,17 @@ nav ul li button {
     justify-content: left;
     width: 100%;
     padding-bottom: 1%;
+    max-height: 55px;
 }
 
-.title-input {
+.titleInput {
+    font-family: var(--notes-font);
     display: flex;
-    flex: 0 1 355px;
+    flex: 1 0;
     font-size: larger;
     font-weight: 700;
     height: 100%;
+    max-height: 50px;
     resize: none;
     border-radius: 6px ;
     border: none;
@@ -89,84 +124,93 @@ nav ul li button {
     padding: 2%;
     width: 100%;
     background-color: var(--color-light);
-
 }
 
-.content-input {
-    display: flex;
-    flex: 1 0 250px; 
+.contentInput {
+    font-family: var(--notes-font);
+    display: inline-block;
+    flex: 1 1 auto;
+    height: 100%;
+    max-height: 80vh;
     margin: 15px;
-    width: 100%;
     min-height: 40px;
-    resize: vertical;
-    overflow: hidden;
+    overflow-y: auto;
     margin: 0;
     font-size: larger;
-    font-weight: 700;
+    font-weight: 400;
     border: none;
     border-radius: 6px ;
     padding: 2%;
     background-color: var(--color-light);
 
 }
+
+.contentInput::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+.contentInput::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.contentInput::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: var(--color-med);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+.contentInput::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent);
+}
+
+textarea:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--color-accent);
+    transition: all 0.2s;
+  }
 
 .note-buttons {
-    position: absolute;
     display: flex;
-    width: fit-content;
-    right: 15px;
-    top: 15px;
+    flex: 0 1 40px;
     gap: 5px;
-    justify-content: space-around;
+    min-height: 40px;
+    align-content: center;
+    justify-items: space-around;
+    margin-left: 5px;
+    flex-wrap: wrap;
+
 }
 
-.note-buttons button {
+.note-buttons .button, .note-buttons button {
     display: flex;
+    padding: 7px;
+    font-size: larger;
+    font-weight: 700;
+    align-items: center;
+    background-color: var(--color-light);
+    color: var(--color-accent);
+    text-decoration: none;
     border: none;
     border-radius: 5px;
-    padding: 6px;
-    flex: 1 0 28px;
-    justify-content: center;
+    flex: 1 1 auto;
+    justify-content: space-evenly;
+    transition: all 0.2s;
+
 }
 
-form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    flex: 1 0;
-    margin: 5px;
+.note-buttons .button:hover, .note-buttons button:hover {
+    box-shadow: 0 0 0 3px var(--color-accent);
+    transition: all 0.2s;
 }
 
 
-
-
-#loginDialog {
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    border: none;
-    background-color: unset;
+.fade {
+    opacity: 0;
+    transform: scale(0.1);
 }
 
-#loginDialog div {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-around;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    resize: none;
-    overflow: hidden;
-    background-color: var(--color-accent);
-    padding: 8px;
-}
-
-#loginDialog .title-input {
-    margin-bottom: 6px;
-    max-height: 45px;
-}
 
 #loginDialog::backdrop {
     background: var(--color-dark);
@@ -174,26 +218,28 @@ form {
     backdrop-filter: blur(7px);
 }
 
-.big-button {
-    background-color: var(--color-dark);
-    color: var(--color-light);
-    border-radius: 8px;
-    border: none;
-    padding: 8px;
-}
 
-.flashes {
+
+#flashes {
+    position: fixed;
+    display: block;
+    bottom: 15px;
+    right: 50%;
+    left: 50%;
+    margin-bottom: 15px;
     border-radius: 5px;
     background-color: var(--color-light);
-    opacity: .5;
     padding: 5px 10px;
-    width: 100%;
     color: var(--color-dark);
     font-size: larger;
     font-weight: 600;
+    width: 100%;
+    max-width: 500px;
+    backdrop-filter: blur(7px);
+    z-index: 5;
 }
 
-.flashes ul {
+#flashes ul {
     list-style-type: none;
 }
 
@@ -201,27 +247,32 @@ form {
     background-color: var(--color-med);
     color: var(--color-light);
     border: 2px solid var(--color-accent);
-    border-radius: 30px;
+    border-radius: 50%;
     box-shadow: var(--color-accent) 4px 4px 0 0;
     cursor: pointer;
-    display: inline-block;
+    display: inline;
+    min-height: 50px;
     font-weight: 700;
     font-size: 28px;
-    padding: 0 25px;
-    line-height: 50px;
-    text-align: center;
     text-decoration: none;
     user-select: none;
+    text-align: center;
+    vertical-align: middle;
     -webkit-user-select: none;
     touch-action: manipulation;
-    position: absolute;
-    left: 45%;
-    top: 50px;
+    position: fixed;
+    left: 15px;
+    bottom: 50px;
+    width: 9vh;
+    height: 9vh;
+    padding: 2vh 2vh;
+    z-index: 11;
 }
 
 .add-corner:hover {
   background-color: var(--color-light);
   color: var(--color-accent);
+  z-index: 10;
 }
 
 .add-corner:active {
@@ -229,9 +280,3 @@ form {
   transform: translate(2px, 2px);
 }
 
-@media screen and (min-width: 768px) {
-    .add-corner {
-    font-size: 48px;
-    padding: 10px 45px;
-    }
-}

@@ -14,57 +14,65 @@
 	
 
 		
-	<nav>
-		this functionality is beta af<br>
-		and yeah, there's cookies
-		<a href="https://github.com/stanjosh/notes-app">project github</a>
-		<ul>
-			
-			<li><input type="submit" value="login" id="loginButton"></a>
-			<li><a href="/login"><input type="submit" value="logout"></a>
-			<li><a href="/debug"><input type="submit" value="session info"></a>
-			<li><a href="/reset"><input type="submit" value="reset"></a>
-
-	</nav>	
-	<main class="wrapper">
-		{% with messages = get_flashed_messages() %}
-		{% if messages %}
-		<div class="flashes">
-			<ul>
-
-			{% for message in messages %}
-			<li>{{ message }}</li>
-			{% endfor %}
-			</ul>
-			</div>
-			{% endif %}
-			{% endwith %}
-		
-
+	
+	<main class="wrapper" id="wrapper">
 		{% block edit %}{% endblock %}
 		{% block notes %}{% endblock %}
+		
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			
+			<div id="flashes">
+				<ul>
+
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+				</ul>
+			</div>
+			
+		{% endif %}
+		{% endwith %}
+		</div>
 	</main>
-	
+
 
 	
-	
-	<div class="background"></div>
-	
+	<a href="/add" class="add-corner" role="button" id="cornerButton">&#10010</a>
+	<div id="background" class="background"></div>
+	<iframe style="display:none" id="hiddenForm" name="hiddenForm"></iframe>
 </body>
+
+	<dialog id="nav">
+		<small>and yeah, there's cookies</small> 
+		<div class="note-buttons">
+			<a type="button" class="button" href="https://github.com/stanjosh/notes-app">git</a>
+			<a type="button" class="button" href="/login" id="loginButton">logout</a>
+			<a type="button" class="button" href="/debug">session info</a>
+			<a type="button" class="button" href="/reset">reset db</a>
+			<a type="button" class="button" id="closeDebug">close</a>
+		</div>
+	</dialog>
+
 	<dialog id="loginDialog">
-		<div style="margin-bottom: 6px;">(you can use a fake email. it just identifies the session)</div>
+		<div style="margin-bottom: 6px;">(you can use a fake email. no one cares)</div>
         <div class="login-form">
 			
 			<form method="post" action="/success">  
 
 				<input type='email' name='email' placeholder='email' class="title-input" rows="1">
 				<input type='password' name='password' placeholder='password' class="title-input" rows="1">
-				<input class="big-button" id="emailConfirmBtn" type="submit" value="&#10004">
-		
+				<div class="note-buttons"><button id="emailConfirmBtn" type="submit" value="&#10004"></div>
 
 			</form>
 		</div>
 	</dialog>
+
 	<script src="{{ url_for('static', filename='dialogs.js') }}"></script>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<script defer>window.onload = delayFade(flashes, 3500)</script>
+	{% endif %}
+	{% endwith %}
 	{% block login %}{% endblock %}
 </html>
