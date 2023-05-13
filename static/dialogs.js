@@ -11,10 +11,6 @@ const hiddenForm = document.getElementById('hiddenForm')
 
 
 function delayFade(element, time, remove=false) {
-    let bro1 = (element.nextElementSibling)
-    let bro2 = (element.previousElementSibling)
-    bro1.setAttribute('transform' , "translate( 0px " + element.offsetHeight + "px)")
-    bro2.setAttribute('transform' , "translate( 0px -" + element.offsetHeight + "px)")
     element.classList.toggle('fade');
     if (remove) {
         var timer = setTimeout(() => {
