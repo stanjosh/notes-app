@@ -24,7 +24,6 @@ html, body {
 
 .background {
     pointer-events: none;
-    background-image: url('ocean.png');
     background-size: cover;
     position: fixed;
     left: 0px;

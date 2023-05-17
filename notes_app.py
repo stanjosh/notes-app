@@ -2,15 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-notes_app = Flask(__name__.split('.')[0])
-notes_app.secret_key = 'dev'
-lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
 
-client = MongoClient('localhost', 27017, connect=False)
-
+notes_app = Flask(__name__)
+client = MongoClient('localhost', 27017, username='admin', password='plastiC8',authMechanism='SCRAM-SHA-1')
 db = client.flask_db
 notes = db.notes
 
+  
+lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, et cetera"
 
 @notes_app.route('/')
 def home(error=None):
@@ -29,7 +28,7 @@ def new_note():
     return redirect(url_for('home'))
 
 
-@notes_app.route('/<id_to_delete>/delete')
+@notes_app.route('/delete/<id_to_delete>')
 def delete_note(id_to_delete):
     if id_to_delete:
         deleted_note = notes.find_one({'_id': ObjectId(id_to_delete)})
@@ -41,7 +40,7 @@ def delete_note(id_to_delete):
     return redirect(url_for('home'))
 
 
-@notes_app.route('/<note_id>/save')
+@notes_app.route('/save/<note_id>')
 def note_to_save(note_id):
     content = request.args.get('content')
     note_title = request.args.get('title')    

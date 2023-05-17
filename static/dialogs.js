@@ -12,12 +12,11 @@ const hiddenForm = document.getElementById('hiddenForm')
 
 function delayFade(element, time, remove=false) {
     element.classList.toggle('fade');
+    element.preventDefault;
     if (remove) {
         var timer = setTimeout(() => {
-
             clearInterval(timer)
             element.style.display = "none"
-            hiddenForm.src = element.id + "/delete"
             wrapper.classList.toggle('squish')
         }, time);
     }

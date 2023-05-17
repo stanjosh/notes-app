@@ -7,15 +7,15 @@
 {% for note in notes %}
 
 
-        <form action="{{note['_id']}}/save" target="hiddenForm" class="noteForm"  id="{{note['_id']}}">
-            
+        <form action="{{url_for('note_to_save', note_id=note['_id'])}}" target="hiddenForm" class="noteForm"  id="{{note['_id']}}">            
 
         
         <div class="titlebar">
             <textarea type="text" class="titleInput" name="title" rows="1" data-formId="{{note['_id']}}">{{note['title']}}</textarea>
             <div class="note-buttons">
 
-                <a class="button delete" role="button" data-formId="{{note['_id']}}">&#10006</a>
+                <a class="button delete" role="button" 
+				onclick="hiddenForm.src={{url_for('delete_note', id_to_delete=note['_id'])}}" data-formId="{{note['_id']}}">&#10006</a>
             </div>
         </div>
 

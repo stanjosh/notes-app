@@ -38,8 +38,8 @@
 
 
 	
-	<a href="/add" class="add-corner" role="button" id="cornerButton">&#10010</a>
-	<div id="background" class="background"></div>
+	<a href="{{url_for('add_note')}}" class="add-corner" role="button" id="cornerButton">&#10010</a>
+	<div id="background" class="background" style="background-image: url({{url_for('static', filename='ocean.png')}})"";></div>
 	<iframe style="display:none" id="hiddenForm" name="hiddenForm"></iframe>
 </body>
 
@@ -47,9 +47,9 @@
 		<small>and yeah, there's cookies</small> 
 		<div class="note-buttons">
 			<a type="button" class="button" href="https://github.com/stanjosh/notes-app">git</a>
-			<a type="button" class="button" href="/login" id="loginButton">logout</a>
-			<a type="button" class="button" href="/debug">session info</a>
-			<a type="button" class="button" href="/reset">reset db</a>
+			<a type="button" class="button" href="{{url_for('login')}}" id="loginButton">logout</a>
+			<a type="button" class="button" href="{{url_for('debug_info')}}">session info</a>
+			<a type="button" class="button" href="{{url_for('reset_notes')}}">reset db</a>
 			<a type="button" class="button" id="closeDebug">close</a>
 		</div>
 	</dialog>
@@ -58,7 +58,7 @@
 		<div style="margin-bottom: 6px;">(you can use a fake email. no one cares)</div>
         <div class="login-form">
 			
-			<form method="post" action="/success">  
+			<form method="post" action="{{url_for('success')}}">  
 
 				<input type='email' name='email' placeholder='email' class="title-input" rows="1">
 				<input type='password' name='password' placeholder='password' class="title-input" rows="1">
