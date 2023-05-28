@@ -2,11 +2,6 @@
 
 Notes app is a beginner project that is able to save notes the user has input.
 
-## Installation
-
-Visit http://projects.tropicks.lol to see it in action.
-
-
 ## technology
 
 Python, Flask, html, css.
